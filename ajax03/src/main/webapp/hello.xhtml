@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+    <title>Ajax with JSF 2.0</title>
+</h:head>
+<h:body>
+    <h:outputScript name="jsf.js" library="javax.faces" target="head"/>
+    <h:outputScript name="ajaxPoll.js" target="head"/>
+    <h:outputScript name="ajaxStatus.js" target="head"/>
+
+    <script type="text/javascript">
+        registerAjaxStatus('ajaxStatus');
+        startAjaxPoll('form:greetingPoll', 5000);
+    </script>
+
+    <h:form id="form">
+        <h:panelGrid columns="1">
+            <h:inputText id="name" value="#{helloController.name}"/>
+            <h:commandButton id="sayHello" value="Update greetings" action="#{helloController.sayHello}">
+                <f:ajax execute="@this name" render="hello"/>
+            </h:commandButton>
+        </h:panelGrid>
+        <h:panelGrid columns="2">
+            <h:outputText value="Greeting (direct):"/>
+            <h:outputText id="hello" value="#{helloController.greeting}"/>
+            <h:outputText value="Greeting (poll):"/>
+            <h:outputText id="greetingPoll" value="#{helloController.greeting}"/>
+        </h:panelGrid>
+
+        <div id="ajaxStatus" style="display: none;background-color: red;color: yellow;">
+            Ajax loading...
+        </div>
+
+    </h:form>
+</h:body>
+</html>
