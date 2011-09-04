@@ -11,7 +11,8 @@
     <h:form id="form">
         <h:panelGrid columns="1">
             <h:inputText id="name" value="#{helloController.name}"/>
-            <h:commandButton id="sayHello" value="Update greetings" action="#{helloController.sayHello}">
+            <h:commandButton id="sayHello" value="Update greetings"
+                    action="#{helloController.sayHello}">
                 <f:ajax execute="@this name" render="hello"/>
             </h:commandButton>
             <h:outputText id="hello" value="#{helloController.greeting}"/>
